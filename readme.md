@@ -10,3 +10,6 @@
 ##### Настраиваем скрипты в package.json
 1. `"start": "node app.js"`
 2. `"server": "nodemon app.js"`
+
+##### Полезные ссылки
+**MySQL2** - https://metanit.com/web/nodejs/8.4.php
