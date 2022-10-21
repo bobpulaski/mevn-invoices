@@ -1,11 +1,14 @@
-const {Router} = require('express');
+const { Router } = require('express');
 const router = Router();
 const mysql = require('mysql2');
 
-const connection = mysql.createConnection({
+const connection = mysql.createPool({
     host: 'localhost',
     user: 'root',
-    database: 'mevn-invoice'
+    database: 'mevn-invoice',
+    waitForConnections: true,
+    connectionLimit: 10,
+    queueLimit: 0
 });
 
 router.get('/company', async (req, res) => {
@@ -19,7 +22,7 @@ router.get('/company', async (req, res) => {
                 //console.log(results); // results contains rows returned by server
             });
     } catch (e) {
-        res.status(500).json({message: 'Error on Company route'});
+        res.status(500).json({ message: 'Error on Company route' });
     }
 });
 
