@@ -1,29 +1,47 @@
-const { Router } = require('express');
+const express = require('express');
+const {Router} = require('express');
 const router = Router();
 const mysql = require('mysql2');
+
+
+router.use(express.json());
 
 const connection = mysql.createPool({
     host: 'localhost',
     user: 'root',
     database: 'mevn-invoice',
-    waitForConnections: true,
-    connectionLimit: 10,
-    queueLimit: 0
 });
 
 router.get('/company', async (req, res) => {
     try {
-
-        connection.query(
+        await connection.execute(
             'SELECT * FROM `companies`',
             function (err, results) {
+                connection.end();
                 if (err) console.log(err);
                 return res.status(200).json(results);
-                //console.log(results); // results contains rows returned by server
             });
     } catch (e) {
-        res.status(500).json({ message: 'Error on Company route' });
+        res.status(500).json({message: 'Error on Company route'});
     }
+});
+
+router.post('/company', async (req, res) => {
+    try {
+        const {name, inn} = req.body;
+
+        let sql = 'INSERT INTO companies (name, inn) VALUES (?, ?)';
+
+        await connection.execute(sql, [name, inn], function (err, results, next) {
+            connection.end();
+            if (err) console.log(err);
+            return res.status(200).json({message: '1 record added.'});
+        });
+
+    } catch (e) {
+        res.status(500).json({message: 'Error on Company/POST route'});
+    }
+
 });
 
 module.exports = router;
