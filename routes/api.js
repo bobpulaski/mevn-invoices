@@ -17,7 +17,6 @@ router.get('/company', async (req, res) => {
         await connection.execute(
             'SELECT * FROM `companies`',
             function (err, results) {
-                connection.end();
                 if (err) console.log(err);
                 return res.status(200).json(results);
             });
