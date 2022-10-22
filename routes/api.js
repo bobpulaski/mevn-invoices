@@ -32,7 +32,6 @@ router.post('/company', async (req, res) => {
         let sql = 'INSERT INTO companies (name, inn) VALUES (?, ?)';
 
         await connection.execute(sql, [name, inn], function (err, results, next) {
-            connection.end();
             if (err) console.log(err);
             return res.status(200).json({message: '1 record added.'});
         });
