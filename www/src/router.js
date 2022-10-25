@@ -7,7 +7,15 @@ import ksoInvoices from '../components/content/kso-invoices';
 export default createRouter({
     history: createWebHashHistory(),
     routes: [
-        {path: '/', component: ksoCompanies},
-        {path: '/invoices', component: ksoInvoices},
+        {
+            path: '/',
+            component: ksoCompanies,
+            name: 'home'
+        },
+        {
+            path: '/invoices',
+            name: 'invoices',
+            component: ksoInvoices
+        },
     ]
 })
