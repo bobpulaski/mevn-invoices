@@ -9,17 +9,19 @@
                     <th scope="col">INN</th>
                 </tr>
             </thead>
-        
-        
-        <tbody v-for="(company, index) of companies" v-bind:key="company.id">
-            <tr>
-                <th>{{ index + 1 }}</th>
-                <th>{{ company.id }}</th>
-                <th>{{ company.name }}</th>
-                <th>{{ company.inn }}</th>
-            </tr>
-        </tbody>
-    </table>
+
+
+            <tbody v-for="(company, index) of companies" v-bind:key="company.id">
+                <tr>
+                    <th>{{ index + 1 }}</th>
+                    <th>{{ company.id }}</th>
+                    <th>{{ company.name }}</th>
+                    <th>{{ company.inn }}</th>
+                </tr>
+            </tbody>
+        </table>
+
+        <button v-on:click="addCompany">addCompany</button>
 
         <ul v-if="errors && errors.length">
             <li v-for="error of errors" v-bind:key="error.id">
@@ -38,6 +40,21 @@ export default {
         return {
             companies: [],
             errors: []
+        }
+    },
+    methods: {
+        async addCompany() {
+            axios.post('api/company', {
+                name: 'JJJ Jaga',
+                inn: '000000999'
+            })
+                .then(response => {
+                    console.log(response.data);
+                    this.companies.push(response.data);
+                })
+                .catch(function (error) {
+                    console.log(error);
+                });
         }
     },
 

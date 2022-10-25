@@ -28,7 +28,7 @@ router.get('/company', async (req, res) => {
 router.post('/company', async (req, res) => {
     try {
         const {name, inn} = req.body;
-
+        console.log(req.body);
         let sql = 'INSERT INTO companies (name, inn) VALUES (?, ?)';
 
         await connection.execute(sql, [name, inn], function (err, results, next) {
