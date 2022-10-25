@@ -1,12 +1,17 @@
 <template>
-    <div class="row kso-header bg-warning">
-        <h1>Header</h1>
+    <div class="row kso-header-wrapper">
+        <ksoNavMenu />
     </div>
 </template>
 
 <script>
+    import ksoNavMenu from '../header/kso-nav-menu.vue';
+    
     export default {
-        name: 'kso-header'
+        name: 'ksoHeader',
+        components: {
+            ksoNavMenu,
+        }
     }
 </script>
 

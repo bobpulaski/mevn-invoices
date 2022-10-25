@@ -1,6 +1,5 @@
 <template>
-    <div class="row kso-content bg-info">
-        <h1>Content</h1>
+    <div class="row kso-content">
         <router-view />
     </div>
 </template>
