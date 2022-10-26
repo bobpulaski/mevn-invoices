@@ -39,30 +39,35 @@ export default {
     data() {
         return {
             companies: [],
-            errors: []
+            errors: [],
+            render: 1
         }
     },
     methods: {
         async addCompany() {
             axios.post('api/company', {
-                name: 'JJJ Jaga',
+                name: 'JJJ Apple',
                 inn: '000000999'
             })
                 .then(response => {
-                    console.log(response.data);
-                    this.companies.push(response.data);
+                    /** 
+                     *? for update component on the page
+                     **/
+                    this.companies.push(
+                        {
+                            'id': response.data.insertId,
+                            'name': JSON.parse(response.config.data).name,
+                            'inn': JSON.parse(response.config.data).inn
+                        });
                 })
                 .catch(function (error) {
                     console.log(error);
                 });
-        }
+        },
     },
-
-    // Извлекает сообщения при создании компонента.
     mounted() {
         axios.get('/api/company')
             .then(response => {
-                // Ответы JSON обрабатываются автоматически.
                 this.companies = response.data
             })
             .catch(e => {
