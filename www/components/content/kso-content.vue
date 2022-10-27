@@ -6,7 +6,7 @@
 
 <script>
     export default {
-        name: 'kso-content',
+        name: 'ksoContent',
     }
 </script>
 

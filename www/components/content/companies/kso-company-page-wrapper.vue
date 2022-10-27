@@ -9,7 +9,7 @@
     export default {
         name: 'ksoCompanyPageWrapper',
         components: {
-            ksoCompanyTable
+            ksoCompanyTable,
         }
     }
 </script>
