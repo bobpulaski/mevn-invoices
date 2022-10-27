@@ -1,5 +1,5 @@
 <template>
-    <div class="row kso-content">
+    <div class="kso-content">
         <router-view />
     </div>
 </template>
