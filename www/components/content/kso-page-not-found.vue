@@ -1,15 +1,13 @@
 <template>
-    <div>
-        <p>Footer</p>
-    </div>
+  <h1>404</h1>
 </template>
 
 <script>
     export default {
-        name: 'kso-footer'
+        name: "ksoPageNotFound"
     }
 </script>
 
-<style>
+<style scoped>
 
 </style>

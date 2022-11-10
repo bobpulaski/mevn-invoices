@@ -1,16 +1,16 @@
 <template>
-  <div class="row kso-header-wrapper">
-    <ksoNavMenu />
+  <div class="header__menu">
+    <ksoUserMenuDropdown />
   </div>
 </template>
 
 <script>
-import ksoNavMenu from "../header/kso-nav-menu.vue";
+import ksoUserMenuDropdown from '../header/kso-user-menu-dropdown.vue';
 
 export default {
   name: "ksoHeader",
   components: {
-    ksoNavMenu,
+      ksoUserMenuDropdown,
   },
 };
 </script>

@@ -1,14 +1,18 @@
 <template>
-    <div class="kso-main-wrapper">
-        <ksoHeader/>
-        <div style="float: left; width: 250px; position: sticky; background-color: burlywood; height: 100%;">
-            <ksoAside/>
-        </div>
-        <div>
-            <ksoContent/>
-            <ksoFooter/>
-        </div>
+  <div class="kso-main-wrapper">
+    <div class="header">
+      <ksoHeader/>
     </div>
+    <div class="sidebar">
+      <ksoAside/>
+    </div>
+    <div class="main">
+      <ksoContent/>
+    </div>
+    <div class="footer">
+      <ksoFooter/>
+    </div>
+  </div>
 </template>
 
 <script>
