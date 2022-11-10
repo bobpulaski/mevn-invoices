@@ -1,5 +1,7 @@
 <template>
   <div>
+    <ksoDeleteModalConfirm/>
+
     <table class="table" v-if="companies && companies.length">
       <thead>
       <tr>
@@ -18,7 +20,8 @@
         <th>{{ company.name }}</th>
         <th>{{ company.inn }}</th>
         <th>
-          <button class="btn bg-info" v-on:click="deleteCompany(company.id)">Удалить</button>
+<!--          <button class="btn bg-info" v-on:click="deleteCompany(company.id)">Удалить</button>-->
+          <button class="btn bg-info" v-on:click="showModal(company.id)">Удалить</button>
         </th>
       </tr>
       </tbody>
@@ -36,9 +39,13 @@
 
 <script>
     import axios from "axios";
+    import ksoDeleteModalConfirm from '../companies/kso-delete-modal-confirm';
 
     export default {
         name: "ksoCompanyTable",
+        components: {
+            ksoDeleteModalConfirm,
+        },
         data() {
             return {
                 companies: [],
@@ -86,7 +93,14 @@
                     .then(() => {
                         this.getCompanies();
                     });
+            },
+
+            showModal(id) {
+                alert(id);
+                /*let myModal = new window.bootstrap.Modal(document.getElementById('exampleModal'));
+                myModal.show();*/
             }
+
         },
 
         mounted() {
