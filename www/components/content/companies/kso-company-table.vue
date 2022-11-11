@@ -1,6 +1,6 @@
 <template>
   <div>
-    <ksoDeleteModalConfirm/>
+    <ksoDeleteModalConfirm />
 
     <table class="table" v-if="companies && companies.length">
       <thead>
@@ -46,6 +46,11 @@
         components: {
             ksoDeleteModalConfirm,
         },
+
+        props: {
+            cid: Number
+        },
+
         data() {
             return {
                 companies: [],
@@ -53,6 +58,7 @@
                 render: 1,
             };
         },
+
         methods: {
             async getCompanies() {
                 await axios
@@ -95,10 +101,10 @@
                     });
             },
 
-            showModal(id) {
-                alert(id);
-                /*let myModal = new window.bootstrap.Modal(document.getElementById('exampleModal'));
-                myModal.show();*/
+            showModal() {
+                //alert(this.cid = id);
+                //let myModal = new window.bootstrap.Modal(document.getElementById('exampleModal'));
+                //myModal.show();
             }
 
         },
