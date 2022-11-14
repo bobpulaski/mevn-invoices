@@ -1,33 +1,41 @@
 <template>
   <div>
-    <ksoDeleteModalConfirm />
+    <ksoDeleteModalConfirm
+    :companyId="companyId"
+    :companyName="companyName"
+    @deleteCompany="getCompanies"
+    />
 
     <table class="table" v-if="companies && companies.length">
       <thead>
-      <tr>
-        <th>#</th>
-        <th>ID</th>
-        <th>NAME</th>
-        <th>INN</th>
-        <th>ACTIONS</th>
-      </tr>
+        <tr>
+          <th>#</th>
+          <th>ID</th>
+          <th>NAME</th>
+          <th>INN</th>
+          <th>ACTIONS</th>
+        </tr>
       </thead>
 
       <tbody v-for="(company, index) of companies" v-bind:key="company.id">
-      <tr>
-        <th>{{ index + 1 }}</th>
-        <th>{{ company.id }}</th>
-        <th>{{ company.name }}</th>
-        <th>{{ company.inn }}</th>
-        <th>
-<!--          <button class="btn bg-info" v-on:click="deleteCompany(company.id)">Удалить</button>-->
-          <button class="btn bg-info" v-on:click="showModal(company.id)">Удалить</button>
-        </th>
-      </tr>
+        <tr>
+          <th>{{ index + 1 }}</th>
+          <th>{{ company.id }}</th>
+          <th>{{ company.name }}</th>
+          <th>{{ company.inn }}</th>
+          <th>
+            <button
+              class="btn bg-info"
+              v-on:click="showModal(company.id, company.name)"
+            >
+              Удалить
+            </button>
+          </th>
+        </tr>
       </tbody>
     </table>
 
-    <button v-on:click="addCompany">addCompany</button>
+    <button v-on:click="addCompany">Добавить компанию</button>
 
     <ul v-if="errors && errors.length">
       <li v-for="error of errors" v-bind:key="error.id">
@@ -38,80 +46,68 @@
 </template>
 
 <script>
-    import axios from "axios";
-    import ksoDeleteModalConfirm from '../companies/kso-delete-modal-confirm';
+import axios from "axios";
+import ksoDeleteModalConfirm from "../companies/kso-delete-modal-confirm";
 
-    export default {
-        name: "ksoCompanyTable",
-        components: {
-            ksoDeleteModalConfirm,
-        },
+export default {
+  name: "ksoCompanyTable",
+  components: {
+    ksoDeleteModalConfirm,
+  },
 
-        props: {
-            cid: Number
-        },
-
-        data() {
-            return {
-                companies: [],
-                errors: [],
-                render: 1,
-            };
-        },
-
-        methods: {
-            async getCompanies() {
-                await axios
-                    .get("/api/company")
-                    //.get("https://jsonplaceholder.typicode.com/posts")
-                    .then((response) => {
-                        this.companies = response.data;
-                    })
-                    .catch((e) => {
-                        this.errors.push(e);
-                    });
-            },
-
-
-            async addCompany() {
-                try {
-                    await axios
-                        .post("api/company", {
-                            name: "JJJ Apple",
-                            inn: "000000999",
-                        })
-                        .then((response) => {
-                            this.companies.push({
-                                id: response.data.insertId,
-                                name: JSON.parse(response.config.data).name,
-                                inn: JSON.parse(response.config.data).inn,
-                            });
-                            //this.getCompanies();
-                        })
-                } catch (e) {
-                    console.log(e);
-                }
-            },
-
-            async deleteCompany(id) {
-                await axios
-                    .delete("api/company/" + id)
-                    .then(() => {
-                        this.getCompanies();
-                    });
-            },
-
-            showModal() {
-                //alert(this.cid = id);
-                //let myModal = new window.bootstrap.Modal(document.getElementById('exampleModal'));
-                //myModal.show();
-            }
-
-        },
-
-        mounted() {
-            this.getCompanies();
-
-        },
+  data() {
+    return {
+      companies: [],
+      errors: [],
+      render: 1,
+      companyId: 0,
+      companyName: "",
     };
+  },
+
+  methods: {
+    async getCompanies() {
+      await axios
+        .get("/api/company")
+        //.get("https://jsonplaceholder.typicode.com/posts")
+        .then((response) => {
+          this.companies = response.data;
+        })
+        .catch((e) => {
+          this.errors.push(e);
+        });
+    },
+
+    async addCompany() {
+      try {
+        await axios
+          .post("api/company", {
+            name: "JJJ Apple",
+            inn: "000000999",
+          })
+          .then((response) => {
+            this.companies.push({
+              id: response.data.insertId,
+              name: JSON.parse(response.config.data).name,
+              inn: JSON.parse(response.config.data).inn,
+            });
+            //this.getCompanies();
+          });
+      } catch (e) {
+        console.log(e);
+      }
+    },
+
+    showModal(id, name) {
+      this.companyId = id;
+      this.companyName = name;
+      let myModal = new window.bootstrap.Modal(document.getElementById('exampleModal'));
+      myModal.show();
+    },
+  },
+
+  mounted() {
+    this.getCompanies();
+  },
+};
 </script>
