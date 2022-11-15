@@ -1,15 +1,13 @@
 <template>
-    <div class="kso-content">
-        <router-view />
-    </div>
+  <div class="kso-content">
+    <router-view />
+  </div>
 </template>
 
 <script>
-    export default {
-        name: 'ksoContent',
-    }
+export default {
+  name: "ksoContent",
+};
 </script>
 
-<style>
-
-</style>
+<style></style>

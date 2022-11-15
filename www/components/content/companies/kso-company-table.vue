@@ -1,9 +1,17 @@
 <template>
   <div>
+    <div class="row mb-4">
+      <div class="col">
+        <h1>Companies</h1>
+      </div>
+      <div class="col text-end">
+        <router-link class="btn btn-info" :to="{ name: 'company-add' }">Добавить компанию</router-link>
+      </div>
+    </div>
     <ksoDeleteModalConfirm
-    :companyId="companyId"
-    :companyName="companyName"
-    @deleteCompany="getCompanies"
+      :companyId="companyId"
+      :companyName="companyName"
+      @deleteCompany="getCompanies"
     />
 
     <table class="table" v-if="companies && companies.length">
@@ -101,7 +109,9 @@ export default {
     showModal(id, name) {
       this.companyId = id;
       this.companyName = name;
-      let myModal = new window.bootstrap.Modal(document.getElementById('exampleModal'));
+      let myModal = new window.bootstrap.Modal(
+        document.getElementById("exampleModal")
+      );
       myModal.show();
     },
   },

@@ -1,5 +1,4 @@
 <template>
-    <h1>Контрагенты</h1>
     <ksoCompanyTable />
 </template>
 
