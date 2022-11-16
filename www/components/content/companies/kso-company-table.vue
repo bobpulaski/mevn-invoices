@@ -5,7 +5,13 @@
         <h1>Companies</h1>
       </div>
       <div class="col text-end">
-        <router-link class="btn btn-info" :to="{ name: 'company-add' }">Добавить компанию</router-link>
+        <router-link
+          class="btn btn-success"
+          :to="{ name: 'company-add', params: { id:1 } }"
+          >Добавить компанию</router-link
+        >
+
+        <!-- <button v-on:click="isAddOrEdit = 'add'">Добавить</button> -->
       </div>
     </div>
     <ksoDeleteModalConfirm
@@ -27,18 +33,18 @@
 
       <tbody v-for="(company, index) of companies" v-bind:key="company.id">
         <tr>
-          <th>{{ index + 1 }}</th>
-          <th>{{ company.id }}</th>
-          <th>{{ company.name }}</th>
-          <th>{{ company.inn }}</th>
-          <th>
+          <td>{{ index + 1 }}</td>
+          <td>{{ company.id }}</td>
+          <td>{{ company.name }}</td>
+          <td>{{ company.inn }}</td>
+          <td>
             <button
-              class="btn bg-info"
+              class="btn btn-danger"
               v-on:click="showModal(company.id, company.name)"
             >
-              Удалить
+              <font-awesome-icon icon="fa-regular fa-trash-alt" />
             </button>
-          </th>
+          </td>
         </tr>
       </tbody>
     </table>
@@ -56,11 +62,14 @@
 <script>
 import axios from "axios";
 import ksoDeleteModalConfirm from "../companies/kso-delete-modal-confirm";
+//import ksoCompanyAddEdit from "../companies/kso-company-add-edit";
 
 export default {
   name: "ksoCompanyTable",
+
   components: {
     ksoDeleteModalConfirm,
+    //ksoCompanyAddEdit,
   },
 
   data() {
@@ -70,6 +79,7 @@ export default {
       render: 1,
       companyId: 0,
       companyName: "",
+      isAddOrEdit: "jaga",
     };
   },
 
@@ -116,7 +126,7 @@ export default {
     },
   },
 
-  mounted() {
+  created() {
     this.getCompanies();
   },
 };

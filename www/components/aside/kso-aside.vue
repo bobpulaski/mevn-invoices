@@ -1,8 +1,6 @@
 <template>
   <h1>ASIDE</h1>
 
-  <h2><font-awesome-icon icon="faFaceAngry" /></h2>
-
   <router-link :to="{ name: 'home' }">Companies</router-link> |
   <router-link :to="{ name: 'invoices' }">Invoices</router-link>
 </template>
@@ -13,4 +11,6 @@ export default {
 };
 </script>
 
-<style></style>
+<style>
+
+</style>

@@ -15,9 +15,10 @@ export default createRouter({
             name: 'home'
         },
         {
-            path: '/company/add',
+            path: '/company/add/:id',
             component: ksoCompanyAddEdit,
-            name: 'company-add'
+            name: 'company-add',
+            props: true
         },
         {
             path: '/invoices',
