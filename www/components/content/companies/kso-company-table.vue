@@ -7,7 +7,7 @@
       <div class="col text-end">
         <router-link
           class="btn btn-success"
-          :to="{ name: 'company-add', params: { id:1 } }"
+          :to="{ name: 'company-add', query: { type:'add' } }"
           >Добавить компанию</router-link
         >
 
@@ -79,7 +79,6 @@ export default {
       render: 1,
       companyId: 0,
       companyName: "",
-      isAddOrEdit: "jaga",
     };
   },
 
