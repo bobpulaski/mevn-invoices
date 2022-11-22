@@ -1,4 +1,4 @@
-import {createRouter, createWebHistory} from "vue-router";
+import { createRouter, createWebHistory } from "vue-router";
 
 import ksoCompanies from "../components/content/companies/kso-company-page-wrapper.vue";
 import ksoInvoices from "../components/content/kso-invoices";
@@ -14,10 +14,14 @@ export default createRouter({
       name: "home",
     },
     {
-      path: "/company",
+      path: "/company/add",
       component: ksoCompanyAddEdit,
       name: "company-add",
-      props: true,
+    },
+    {
+      path: "/company/:id/edit",
+      component: ksoCompanyAddEdit,
+      name: "company-edit",
     },
     {
       path: "/invoices",

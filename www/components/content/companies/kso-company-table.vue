@@ -7,7 +7,7 @@
       <div class="col text-end">
         <router-link
           class="btn btn-success"
-          :to="{ name: 'company-add', query: { type:'add' } }"
+          :to="{ name: 'company-add', query: { type: 'add' } }"
           >Добавить компанию</router-link
         >
 
@@ -44,6 +44,22 @@
             >
               <font-awesome-icon icon="fa-regular fa-trash-alt" />
             </button>
+            <button
+              class="btn btn-success ms-2"
+              v-on:click="showEditPage(company.id)"
+            >
+              <font-awesome-icon icon="fa-regular fa-edit" />
+            </button>
+
+            <!-- <router-link
+              class="btn btn-success"
+              :to="{
+                name: 'company-edit',
+                params: { id: company.id },
+                query: { type: 'edit' },
+              }"
+              >Редактировать</router-link
+            > -->
           </td>
         </tr>
       </tbody>
@@ -62,14 +78,12 @@
 <script>
 import axios from "axios";
 import ksoDeleteModalConfirm from "../companies/kso-delete-modal-confirm";
-//import ksoCompanyAddEdit from "../companies/kso-company-add-edit";
 
 export default {
   name: "ksoCompanyTable",
 
   components: {
     ksoDeleteModalConfirm,
-    //ksoCompanyAddEdit,
   },
 
   data() {
@@ -122,6 +136,21 @@ export default {
         document.getElementById("exampleModal")
       );
       myModal.show();
+    },
+
+    showEditPage(id) {
+      //let cid = id.toString();
+      const encryptedId = this.$CryptoJS.AES.encrypt(
+        id.toString(),
+        "jaga"
+      ).toString();
+      console.log(encryptedId);
+
+      this.$router.push({
+        name: "company-edit",
+        params: { id: encryptedId },
+        query: { type: "edit" },
+      });
     },
   },
 
