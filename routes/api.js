@@ -36,6 +36,23 @@ router.get("/company/:id", async (req, res) => {
   } catch (e) {}
 });
 
+router.put("/company/update", async (req, res) => {
+  try {
+    //console.log(req.body.data.id);
+    let sql = "UPDATE companies SET name = ?, inn = ? WHERE id = ?";
+    await connection.execute(
+      sql,
+      [req.body.data.name, req.body.data.inn, req.body.data.id],
+      function (err, results) {
+        if (err) console.log(err);
+        res.status(200).json("put is ok");
+      }
+    );
+  } catch (e) {
+    res.status(500).json({ message: "Error on Company PUT" });
+  }
+});
+
 router.post("/company", async (req, res) => {
   try {
     const { name, inn } = req.body;
